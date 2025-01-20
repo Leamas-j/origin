@@ -30,40 +30,40 @@ int main()
 		case 0:
 			std::cout << "До свидания" << std::endl;
 			break;
-		case January:
+		case static_cast<int>(January):
 			std::cout << "Январь" << std::endl;
 			break;
-		case February:
+		case static_cast<int>(February):
 			std::cout << "Февраль" << std::endl;
 			break;
-		case March:
+		case static_cast<int>(March):
 			std::cout << "Март" << std::endl;
 			break;
-		case April:
+		case static_cast<int>(April):
 			std::cout << "Апрель" << std::endl;
 			break;
-		case May:
+		case static_cast<int>(May):
 			std::cout << "Май" << std::endl;
 			break;
-		case June:
+		case static_cast<int>(June):
 			std::cout << "Июнь" << std::endl;
 			break;
-		case July:
+		case static_cast<int>(July):
 			std::cout << "Июль" << std::endl;
 			break;
-		case August:
+		case static_cast<int>(August):
 			std::cout << "Август" << std::endl;
 			break;
-		case September:
+		case static_cast<int>(September):
 			std::cout << "Сентябрь" << std::endl;
 			break;
-		case October:
+		case static_cast<int>(October):
 			std::cout << "Октябрь" << std::endl;
 			break;
-		case November:
+		case static_cast<int>(November):
 			std::cout << "Ноябрь" << std::endl;
 			break;
-		case December:
+		case static_cast<int>(December):
 			std::cout << "Декабрь" << std::endl;
 			break;
 		default:

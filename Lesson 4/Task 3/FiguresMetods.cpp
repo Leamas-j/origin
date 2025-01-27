@@ -26,10 +26,12 @@ public:
     void print_name() {
         std::cout << name << ":\n";
     }
-    virtual void check_figures() {
-        std::cout << "Правильная\n";
+    virtual bool check_figures() {
+        return true;
     }
     virtual void print_sides_coners() {
+        if (check_figures()) std::cout << "Правильная\n";
+        else  std::cout << "Неправильная\n";
         std::cout << "Количество сторон: " << sides_count << std::endl << std::endl;
     } 
     virtual int coners_summ() {
@@ -52,14 +54,13 @@ public:
     int coners_summ() override{
         return A + B + C;
     }
-    void check_figures() override{
+    bool check_figures() override{
         int summ = coners_summ();
-        if (summ == 180) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return (summ == 180) ? true : false;
     }
     void print_sides_coners() override {
+        if (check_figures()) std::cout << "Правильная\n";
+        else  std::cout << "Неправильная\n";
         std::cout << "Количество сторон: " << sides_count << std::endl <<
             "Стороны: a=" << std::to_string(a) << " b=" + std::to_string(b) << " c=" << std::to_string(c) << "\n" <<
             "Углы: A=" << std::to_string(A) << " B=" << std::to_string(B) << " C=" << std::to_string(C) << "\n\n";
@@ -77,12 +78,9 @@ public:
         this->B = B;
         this->C = C;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((C == 90) && (summ == 180)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((C == 90) && (summ == 180)) ? true : false;
     }
 };
 
@@ -97,12 +95,9 @@ public:
         this->B = B;
         this->C = C;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((a == c) && (A == C) && (summ == 180)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((a == c) && (A == C) && (summ == 180)) ? true : false;
     }       
 };
 
@@ -117,12 +112,9 @@ public:
         this->B = B;
         this->C = C;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((a == c) && (a == b) && (A == 60) && (B == 60) && (C == 60) && (summ == 180)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((a == c) && (a == b) && (A == 60) && (B == 60) && (C == 60) && (summ == 180)) ? true : false;
     }
 };
 
@@ -143,18 +135,18 @@ public:
     int coners_summ() override {
         return A + B + C + D;
     }
+    bool check_figures() override {
+        int summ = coners_summ();
+        return (summ == 360) ? true : false;
+    }
     void print_sides_coners() override {
+        if (check_figures()) std::cout << "Правильная\n";
+        else  std::cout << "Неправильная\n";
         std::cout << "Количество сторон: " << sides_count << std::endl <<
             "Стороны: a=" << std::to_string(a) << " b=" + std::to_string(b) << " c=" << std::to_string(c) << " d=" << std::to_string(d) << "\n" <<
             "Углы: A=" << std::to_string(A) << " B=" << std::to_string(B) << " C=" << std::to_string(C) << " D=" << std::to_string(D) << "\n\n";
     }
-    void check_figures() override {
-        int summ = coners_summ();
-        if (summ == 360) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
-    }
+    
 };
 
 class Rectangle : public Quadrangle {
@@ -170,12 +162,9 @@ public:
         this->C = C;
         this->D = D;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90) && (summ == 360)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90) && (summ == 360)) ? true : false;
     }
 };
 
@@ -192,12 +181,9 @@ public:
         this->C = C;
         this->D = D;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((a == c) && (a == b) && (a == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90) && (summ == 360)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((a == c) && (a == b) && (a == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90) && (summ == 360)) ? true : false;
     }
 };
 
@@ -214,12 +200,9 @@ public:
         this->C = C;
         this->D = D;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((a == c) && (b == d) && (A == C) && (B == D) && (summ == 360)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((a == c) && (b == d) && (A == C) && (B == D) && (summ == 360)) ? true : false;
     }
 };
 
@@ -236,19 +219,15 @@ public:
         this->C = C;
         this->D = D;
     }
-    void check_figures() override {
+    bool check_figures() override {
         int summ = coners_summ();
-        if ((a == c) && (a == b) && (a == d) && (A == C) && (B == D) && (summ == 360)) {
-            std::cout << "Правильная\n";
-        }
-        else std::cout << "Неправильная\n";
+        return ((a == c) && (a == b) && (a == d) && (A == C) && (B == D) && (summ == 360)) ? true : false;
     }
 };
 
 
 void print_info(Figure* figure) {
     figure->print_name();
-    figure->check_figures();
     figure->print_sides_coners();
 }
 

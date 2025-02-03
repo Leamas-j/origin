@@ -2,9 +2,11 @@
 #include <string>
 #include <Windows.h>
 
+#include "MyException.h"
+
 int function(std::string str, int forbidden_length) {
 	int length = str.length();
-	if (length == forbidden_length) throw "Вы ввели слово запретной длинны! До свидания\n";
+	if (length == forbidden_length) throw MyException("Вы ввели слово запретной длинны! До свидания\n");
 	return length;
 }
 int main()
@@ -22,8 +24,8 @@ int main()
 		try {
 			std::cout << "Длина слова \"" << word << "\" равна " << function(word, len) << std::endl;
 		}
-		catch (const char* err) {
-			std::cout << err << std::endl;
+		catch (MyException myExcp) {
+			std::cout << myExcp.what() << std::endl;
 			break;
 		}
 	}

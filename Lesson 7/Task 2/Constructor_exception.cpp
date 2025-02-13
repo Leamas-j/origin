@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+
 #include "RightTriangle.h"
 #include "IsoscelesTriangle.h"
 #include "EquilaterallesTriangle.h"
@@ -6,6 +7,7 @@
 #include "Square.h"
 #include "Parallelogram.h"
 #include "Rhomb.h"
+
 #include "MyException.h"
 
 void print_info(Figure* figure) {

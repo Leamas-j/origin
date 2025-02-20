@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.20)
+project(leavingCMake)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+add_library(DynamicLeaving SHARED Leaver.cpp)
+add_executable(leavingCMake main.cpp)
+target_link_libraries(leavingCMake DynamicLeaving)

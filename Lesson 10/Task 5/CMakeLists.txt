@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(class_hierarchy)
+set(SOURCE_F EquilaterallesTriangle.cpp Figure.cpp IsoscelesTriangle.cpp Parallelogram.cpp Quadrangle.cpp Rectangle.cpp Rhomb.cpp RightTriangle.cpp Square.cpp Triangle.cpp)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+add_library(class_hierarchy_dll SHARED ${SOURCE_F})
+add_executable(class_hierarchy Class_hierarchy.cpp)
+target_link_libraries(class_hierarchy class_hierarchy_dll)

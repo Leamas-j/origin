@@ -1,8 +1,0 @@
-﻿  Leaver.cpp
-C:\Users\Leamas\source\repos\MySolutionDinLib\DinamicLeaver\Leaver.h(10,14): warning C4251: "Leaver::name": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Leaver"
-  (компиляция исходного файла "Leaver.cpp")
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xstring(527,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-  
-     Создается библиотека C:\Users\Leamas\source\repos\MySolutionDinLib\x64\Debug\DinamicLeaver.lib и объект C:\Users\Leamas\source\repos\MySolutionDinLib\x64\Debug\DinamicLeaver.exp
-  DinamicLeaver.vcxproj -> C:\Users\Leamas\source\repos\MySolutionDinLib\x64\Debug\DinamicLeaver.dll

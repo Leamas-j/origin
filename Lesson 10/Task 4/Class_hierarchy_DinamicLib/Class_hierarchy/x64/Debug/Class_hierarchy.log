@@ -1,7 +1,0 @@
-﻿  main.cpp
-C:\Users\Leamas\source\repos\Class_hierarchy_DinamicLib\DynamicLibClassH\Figure.h(15,14): warning C4251: "Figure::name": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Figure"
-  (компиляция исходного файла "main.cpp")
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xstring(527,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-  
-  Class_hierarchy.vcxproj -> C:\Users\Leamas\source\repos\Class_hierarchy_DinamicLib\x64\Debug\Class_hierarchy.exe

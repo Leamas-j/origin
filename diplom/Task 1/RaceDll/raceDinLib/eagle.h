@@ -5,6 +5,6 @@ class EXP Eagle :  public Air
 {
 public:
 	Eagle(float distance);
-	virtual float calcDecrease() override;
+	float calcDecrease() override;
 };
 

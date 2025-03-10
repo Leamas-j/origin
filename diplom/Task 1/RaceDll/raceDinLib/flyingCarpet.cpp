@@ -9,14 +9,17 @@ FlyingCarpet::FlyingCarpet(float distance){
 float FlyingCarpet::calcDecrease()
 {
 	int tmp{0};
+	int smallDistance{ 1000 };
+	int middleDistance{ 5000 };
+	int largeDistance{ 10000 };
 
-	if((distance >= 1000)&&(distance < 5000)) {
+	if((distance >= smallDistance)&&(distance < middleDistance)) {
 		tmp = 3;
 	} 
-	else if((distance >= 5000) && (distance < 10000)) {
+	else if((distance >= middleDistance) && (distance < largeDistance)) {
 		tmp = 10;
 	}
-	else if (distance >= 10000) {
+	else if (distance >= largeDistance) {
 		tmp = 5;
 	}
 	return 1 - static_cast<float>(tmp) / 100;

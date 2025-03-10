@@ -5,5 +5,5 @@
 class EXP Air : public Transport
 {
 public:
-    virtual void calcRaceResult() override;
+    void calcRaceResult() override;
 };

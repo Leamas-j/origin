@@ -4,18 +4,18 @@
 
 #include "windows.h"
 
-#include "transport.h"
-#include "air.h"
-#include "ground.h"
-#include "camel.h"
-#include "camelfast.h"
-#include "centaur.h"
-#include "roverboots.h"
-#include "broom.h"
-#include "flyingCarpet.h"
-#include "eagle.h"
+#include "DLL/transport.h"
+#include "DLL/air.h"
+#include "DLL/ground.h"
+#include "DLL/camel.h"
+#include "DLL/camelfast.h"
+#include "DLL/centaur.h"
+#include "DLL/roverboots.h"
+#include "DLL/broom.h"
+#include "DLL/flyingCarpet.h"
+#include "DLL/eagle.h"
 
-#include "myException.h"
+#include "DLL/myException.h"
 
 namespace  race {
     enum eRaceType {

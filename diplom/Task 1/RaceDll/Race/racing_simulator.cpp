@@ -34,7 +34,7 @@ namespace  race {
     };
 }
 
-bool checkTransport(const int raceNum, const int transpNum, const std::vector<Transport*> trForRace, const std::vector<std::string> allTransp);
+bool checkTransport(const int raceNum, const int transpNum, const std::vector<Transport*> trForRace, const std::vector<std::string> &allTransp);
 bool mySortFunc(Transport* a, Transport* b);
 
 int main()
@@ -143,7 +143,7 @@ int main()
                                      break;
                                  }
                              }
-                             catch (MyException myExc) {
+                             catch (MyException& myExc) {
                                  std::cout << myExc.what() << std::endl;
                              }
                              transportForRace.push_back(tr);
@@ -175,7 +175,7 @@ int main()
      return 0;
 }
 
-bool checkTransport(const int raceNum, const int transpNum, const std::vector<Transport*> trForRace, const std::vector<std::string> allTransp){
+bool checkTransport(const int raceNum, const int transpNum, const std::vector<Transport*> trForRace, const std::vector<std::string> &allTransp){
     if(raceNum == static_cast<int>(race::Air)) {
         switch (transpNum) {
         case static_cast<int>(race::RoverBoots):

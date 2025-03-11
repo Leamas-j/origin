@@ -6,6 +6,6 @@ class Broom :  public Air
 {
 public:
 	Broom(float distance);
-	virtual float calcDecrease() override;
+	float calcDecrease() override;
 };
 

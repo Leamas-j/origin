@@ -4,26 +4,32 @@
 int* merge(int* arr1, int size1, int* arr2, int size2);
 int* merge_sort(int* arr, int size);
 void printArr(int* arr, int size);
+
 int main()
 {
-    SetConsoleOutputCP(1251);
-    /*
-    const int sizeA = 10;
-    int arA[sizeA] = { 3, 43, 38, 29, 18, 72, 57, 61, 2, 33 };
-    */
-    /* 
-    const int sizeA = 15;  
-    int arA[sizeA] = { 88, 91, 87, 59, 53, 49, 29, 16, 4, 27, 28, 89, 2, 25 ,74 };
-    */
-    const int sizeA = 18;
-    int arA[sizeA] = { 24, 66, 20, 79, 30, 16, 19, 62, 94, 59, 0, 7, 59, 90, 84, 60, 95, 62 };
-    std::cout << "Исходный массив: ";
-    printArr(arA, sizeA);
+    SetConsoleOutputCP(1251); 
+
+    int size[3]{10,15,18};
+
+    int** arrAll = new int*[3];
+    arrAll[0] = new int[size[0]]{ 3, 43, 38, 29, 18, 72, 57, 61, 2, 33 };    
+    arrAll[1] = new int[size[1]]{ 88, 91, 87, 59, 53, 49, 29, 16, 4, 27, 28, 89, 2, 25 ,74 };   
+    arrAll[2] = new int[size[2]] { 24, 66, 20, 79, 30, 16, 19, 62, 94, 59, 0, 7, 59, 90, 84, 60, 95, 62 };
+
     int* arB;
-    arB = merge_sort(arA, sizeA);
-    std::cout << "Отсортированный массив: ";
-    printArr(arB, sizeA);
-    delete[] arB;
+    for (int i = 0; i < 3; ++i) {
+        std::cout << "Исходный массив: ";
+        printArr(arrAll[i], size[i]);
+        arB = merge_sort(arrAll[i], size[i]);
+        std::cout << "Отсортированный массив: ";
+        printArr(arB, size[i]);
+        delete[] arB; 
+        std::cout << std::endl;
+    }
+    for (int i = 0; i < 3; ++i) {
+        delete[] arrAll[i];
+    }
+    delete[] arrAll;
     return 0;
 }
 

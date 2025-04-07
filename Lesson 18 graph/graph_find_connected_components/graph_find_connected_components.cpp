@@ -3,7 +3,7 @@
 #include <vector>
 #include "Windows.h"
 
-void depth_first_search(int** graf, const int vertex, std::vector<int> &visited, const int vertexCount, int* components, int& comp);
+void depth_first_search(int** graph, const int vertex, std::vector<int> &visited, const int vertexCount, int* components, int& comp);
 int main()
 {
     SetConsoleOutputCP(1251);
@@ -11,16 +11,16 @@ int main()
     int vertexCount;
     if (fin.is_open()) {
         fin >> vertexCount;
-        int** graf = new int* [vertexCount];
+        int** graph = new int* [vertexCount];
         for (int i = 0; i < vertexCount; ++i) {
-            graf[i] = new int[vertexCount];
+            graph[i] = new int[vertexCount];
         }
         for (int i = 0; i < vertexCount; ++i) {
             for (int j = 0; j < vertexCount; ++j) {
-                fin >> graf[i][j];
+                fin >> graph[i][j];
             }
         }
-        
+        fin.close();
         std::vector<int> visitedVertex;
         int* connectedComponent = new int[vertexCount] { 0 };
         int conComp{ 0 };
@@ -29,7 +29,7 @@ int main()
         for (int i = 0; i < vertexCount; ++i) {
             if (!connectedComponent[i]) {
                 ++conComp;
-                depth_first_search(graf, i, visitedVertex, vertexCount, connectedComponent, conComp);
+                depth_first_search(graph, i, visitedVertex, vertexCount, connectedComponent, conComp);
                
             }
         } 
@@ -40,9 +40,9 @@ int main()
         std::cout << "Количество компонентов связности в графе: " << conComp;
         std::cout << std::endl;
         for (int i = 0; i < vertexCount; ++i) {
-            delete[] graf[i];
+            delete[] graph[i];
         }
-        delete[] graf;
+        delete[] graph;
         delete[] connectedComponent;
     }
     else {
@@ -50,13 +50,13 @@ int main()
     }
 }
 
-void depth_first_search(int** graf, const int vertex, std::vector<int> &visited, const int vertexCount, int* components, int& comp) {
+void depth_first_search(int** graph, const int vertex, std::vector<int> &visited, const int vertexCount, int* components, int& comp) {
     visited.push_back(vertex);
     components[vertex] = comp;
     for (int i = 0; i < vertexCount; ++i) {
-        if (graf[i][vertex] == 1) {
+        if (graph[i][vertex] == 1) {
             if (!components[i]) {
-                depth_first_search(graf, i, visited, vertexCount, components, comp);
+                depth_first_search(graph, i, visited, vertexCount, components, comp);
             }
         }
     }

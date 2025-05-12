@@ -9,7 +9,7 @@ T squaring(T a) {
 template<class T>
 std::vector<T> squaring(const std::vector<T>& a) {
   std::vector<T> result;
-  for (T k : a) {
+  for (const T &k : a) {
     result.push_back(squaring(k));
   }
   return result;

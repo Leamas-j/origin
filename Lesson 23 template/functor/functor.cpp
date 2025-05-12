@@ -2,17 +2,14 @@
 
 class Functor {
   unsigned m_sum;
-  unsigned m_counter;   
-  int arr[6]{ 4, 1, 3, 6, 25, 54 };
+  unsigned m_counter; 
 public:
   Functor() : m_sum{ 0 }, m_counter{ 0 } {   
   }
-  void operator()() { 
-    for (int k : arr) {
-      if (k % 3 == 0) {
-        m_sum += k;
-        ++m_counter;
-      }
+  void operator()(int k) { 
+    if (k % 3 == 0) {
+      m_sum += k;
+      ++m_counter;
     }
   }
   unsigned get_sum() {
@@ -24,7 +21,12 @@ public:
 };
 int main() {
   Functor f;
-  f();
+  f( 4 );
+  f( 1 );
+  f( 3 );
+  f( 6 );
+  f( 25 );
+  f( 54 );
   std::cout << "get_sum() = " << f.get_sum() << std::endl;
   std::cout << "get_count() = " << f.get_count() << std::endl;
   return 0;

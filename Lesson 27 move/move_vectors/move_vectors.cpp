@@ -8,8 +8,6 @@ void move_vectors(std::vector<T>& source, std::vector<T>& destination) {
   if (&source != &destination) {
     
     destination = std::move(source);
-   
-    source.clear();
   }
 }
 

@@ -36,13 +36,11 @@ public:
 
   big_integer(big_integer&& other) noexcept
     : digits(std::move(other.digits)) {
-    other.digits = { 0 };
   }
 
   big_integer& operator=(big_integer&& other) noexcept {
     if (this != &other) {
       digits = std::move(other.digits);
-      other.digits = { 0 };
     }
     return *this;
   }

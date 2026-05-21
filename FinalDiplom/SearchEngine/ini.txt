@@ -1,0 +1,7 @@
+localhost
+5432
+SearchEngine
+postgres
+1248892
+C:\Users\Leamas\Desktop\Новая папка
+txt,csv,log,html,htm,php,js,css,c,cpp,py,ini,md,h,hpp

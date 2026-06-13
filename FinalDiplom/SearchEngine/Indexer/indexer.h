@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <mutex>
 
-#include "database.h"
+#include "../Shared/database.h"
 
 class Indexer
 {

@@ -4,29 +4,38 @@ project(SearchEngine)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(SearchEngine
-    main.cpp  
-    indexer.cpp
-    dirReader.cpp
-    database.cpp
-    ini.cpp
-    thread_pool.cpp
-    safe_queue.cpp
-)
 set(PostgreSQL_ADDITIONAL_VERSIONS "17")
 add_subdirectory(C:/Users/Leamas/Desktop/cMake/libpqxx-7.10.0 libpqxx-build) 
 
-target_include_directories(SearchEngine PRIVATE C:/Boost/include/boost-1_86)
-target_link_directories(SearchEngine PRIVATE C:/Boost/lib)
-
 find_package(Boost REQUIRED COMPONENTS system)
-target_compile_features(SearchEngine PRIVATE cxx_std_17)
 
-target_link_libraries(SearchEngine 
-    pqxx 
-    Boost::system
+set(COMMON_INCLUDE_DIR C:/Boost/include/boost-1_86)
+set(COMMON_LINK_DIR C:/Boost/lib)
+set(LINK_LIBRARIES pqxx Boost::system)
+set(COMMON_SOURCES  Shared/ini_parser.cpp Shared/database.cpp Shared/string_modify.cpp)
+
+add_executable(Indexer
+    ${COMMON_SOURCES}
+    Indexer/main.cpp  
+    Indexer/indexer.cpp
+    Indexer/dirReader.cpp
+    Indexer/thread_pool.cpp
+    Indexer/safe_queue.cpp)
+
+target_include_directories(Indexer PRIVATE ${COMMON_INCLUDE_DIR})
+target_link_directories(Indexer PRIVATE ${COMMON_LINK_DIR})
+target_link_libraries(Indexer PRIVATE ${LINK_LIBRARIES}) 
+target_compile_features(Indexer PRIVATE cxx_std_17)
+
+add_executable(Searcher
+    ${COMMON_SOURCES}
+    Searcher/main.cpp    
 )
 
+target_include_directories(Searcher PRIVATE ${COMMON_INCLUDE_DIR})
+target_link_directories(Searcher PRIVATE ${COMMON_LINK_DIR})
+target_link_libraries(Searcher PRIVATE ${LINK_LIBRARIES})
+target_compile_features(Searcher PRIVATE cxx_std_17)
 
 if(MSVC)
     add_compile_options("/utf-8")

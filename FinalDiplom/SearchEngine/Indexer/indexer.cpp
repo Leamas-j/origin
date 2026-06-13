@@ -1,9 +1,8 @@
 ﻿#include "indexer.h"
-#include <codecvt>
 #include <cctype> 
 #include <Windows.h>
 #include <boost/locale.hpp>
-
+#include "../Shared/string_modify.h"
 
 constexpr unsigned char WHITESPACE = ' ';
 
@@ -35,9 +34,6 @@ namespace Utf8Constants {
   }
 }
 
-std::wstring to_wstring(const std::string& str);
-std::string wstring_to_utf8(const std::wstring& wstr);
-
 void fillMap(const std::string& buf, std::map<std::string, int>& wCount);
 
 Indexer::Indexer(){}
@@ -53,7 +49,7 @@ void Indexer::index(const std::string& fileName, DataBase& db)
   inputFile.close();
 
   std::wstring wideData;
-  wideData = to_wstring(fileData);
+  wideData = String_modify::to_wstring(fileData);
 
   boost::locale::generator gen;
   std::locale loc = gen("ru_RU.UTF-8");
@@ -68,7 +64,7 @@ void Indexer::index(const std::string& fileName, DataBase& db)
       resultWide += L' ';
     }
   }
-  std::string cleanedSTR = wstring_to_utf8(resultWide);
+  std::string cleanedSTR = String_modify::wstring_to_utf8(resultWide);
 
   std::string lower = boost::locale::to_lower(cleanedSTR, loc);
 
@@ -134,34 +130,4 @@ void fillMap(const std::string& buf, std::map<std::string, int>& wCount)
   }
 }
 
-std::wstring to_wstring(const std::string& str) 
-{ 
-  try {
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    return converter.from_bytes(str);
-  }
-  catch (const std::range_error& e) 
-  {    
-    int size_needed = MultiByteToWideChar(1251, 0, str.c_str(), (int)str.size(), NULL, 0);
-    std::wstring result(size_needed, 0);
-    MultiByteToWideChar(1251, 0, str.c_str(), (int)str.size(), &result[0], size_needed);
-    return result;
-  }
-  catch (const std::exception& e) 
-  {
-    std::cerr << "Сonversion error: " << e.what() << std::endl;
-    return L"";
-  }
-}
-std::string wstring_to_utf8(const std::wstring& wstr) 
-{
-  try {
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    return converter.to_bytes(wstr);
-  }
-  catch (const std::exception& e) {
-    std::cerr << "wstring_to_utf8 conversion error: " << e.what() << std::endl;
-    return "";
-  }
-}
  

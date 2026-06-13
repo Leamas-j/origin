@@ -1,8 +1,8 @@
 #include "indexer.h"
-#include "ini.h"
+#include "../Shared/ini_parser.h"
+#include "../Shared/database.h"
 #include "dirReader.h"
 #include "thread_pool.h"
-#include "database.h"
 
 #include <iostream>
 #include <vector>
@@ -17,20 +17,21 @@ int main()
 
   try
   {
-    Ini ini("ini.txt");
+    ini_parser parser("config.ini");
 
-    std::string conn_str = "host = " + ini.get_bd_host() +
-      " port = " + ini.get_bd_port() +
-      " dbname = " + ini.get_bd_name() +
-      " user = " + ini.get_bd_user_name() +
-      " password = " + ini.get_bd_user_password();
+    std::string conn_str = "host = " + parser.get_value("DataBase", "host") +
+      " port = " + parser.get_value("DataBase", "port") +
+      " dbname = " + parser.get_value("DataBase", "dbname") +
+      " user = " + parser.get_value("DataBase", "user") +
+      " password = " + parser.get_value("DataBase", "password");
 
+   
     DataBase db(conn_str);
 
     int num_threads = std::thread::hardware_concurrency() - 1;
 
-    std::string startDir = ini.get_startDir();
-    std::string extensions = ini.get_extensions();
+    std::string startDir = parser.get_value("Files", "startDir");
+    std::string extensions = parser.get_value("Files", "extensions");
 
     DirReader dReader(extensions, startDir);
 

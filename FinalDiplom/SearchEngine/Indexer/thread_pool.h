@@ -2,7 +2,7 @@
 
 #include "safe_queue.cpp"
 #include "indexer.h"
-#include "database.h"
+#include "../Shared/database.h"
 
 class Thread_pool
 {

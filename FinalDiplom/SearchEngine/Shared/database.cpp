@@ -1,4 +1,5 @@
-﻿#include "database.h"
+﻿#include <iostream>
+#include "database.h"
 
 DataBase::DataBase(const std::string& str_connect)
 {
@@ -15,7 +16,7 @@ DataBase::DataBase(const std::string& str_connect)
 
 int DataBase::addWord(const std::string& word)
 {
-  std::lock_guard<std::mutex> lock(mutex_);
+   std::lock_guard<std::mutex> lock(mutex_);  
 
   pqxx::work txn(*conn_);
 
@@ -89,6 +90,64 @@ void DataBase::addWordsDocuments(const int& document_id, const int& word_id, con
     std::cerr << "Filed to add words count : " <<  std::string(e.what());
   }
 }
+std::vector<DataBase::SearchResult> DataBase::selectDocuments(const std::vector<std::string>& words)
+{
+  if (words.empty())
+  {
+    return {};
+  }
+
+  std::lock_guard<std::mutex> lock(mutex_);
+  pqxx::work txn(*conn_);
+
+  try 
+  {
+    std::string placeholders;
+    for (size_t i = 0; i < words.size(); ++i) {
+      if (i > 0) {
+        placeholders += ", ";
+      }
+      placeholders += "$" + std::to_string(i + 1);
+    }
+  
+    std::string query =
+      "SELECT d.id, d.doc_name, SUM(dw.words_count) as total_relevance "
+      "FROM documents d "
+      "JOIN documents_words dw ON dw.doc_id = d.id "
+      "JOIN words w ON w.id = dw.word_id "
+      "WHERE w.word IN (" + placeholders + ") "
+      "GROUP BY d.id, d.doc_name "
+      "HAVING COUNT(DISTINCT w.id) = " + std::to_string(words.size()) + " "
+      "ORDER BY total_relevance DESC;";
+
+    pqxx::params params;
+    for (const auto& word : words) 
+    {
+      params.append(word);
+    }
+
+    pqxx::result res = txn.exec(query, params);
+    txn.commit();
+
+    std::vector<SearchResult> results;
+    for (const auto& row : res) 
+    {
+      results.push_back({
+          row["id"].as<int>(),
+          row["doc_name"].as<std::string>(),
+          row["total_relevance"].as<int>()
+        });
+    }
+
+    return results;
+  }
+  catch (const std::exception& e) 
+  {
+    txn.abort();
+    throw std::runtime_error("Failed to select documents: " + std::string(e.what()));
+  }
+}
+
 void  DataBase::createDatabaseStructure()
 {
   pqxx::work txn(*conn_);
@@ -132,4 +191,3 @@ DataBase :: ~DataBase()
     conn_->close();
   }
 }
-
